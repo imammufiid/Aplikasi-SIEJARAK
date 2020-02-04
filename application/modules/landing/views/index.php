@@ -23,7 +23,7 @@
 							<select name="asal" id="" class="form-control" style="width: 100%">
 								<option value selected disabled>-- Pilih Kota Asal --</option>
 								<?php foreach ($kota as $key => $val) : ?>
-									<option value="<?= $val->id_jalan ?>"><?= $val->nama_jalan ?></option>
+									<option value="<?= $val->id ?>"><?= $val->nama_jalan ?></option>
 								<?php endforeach; ?>
 							</select>
 						</div>
@@ -32,7 +32,7 @@
 							<select name="tujuan" id="" class="form-control" style="width: 100%">
 								<option value selected disabled>-- Pilih Kota Tujuan--</option>
 								<?php foreach ($kota as $key => $val) : ?>
-									<option value="<?= $val->id_jalan ?>"><?= $val->nama_jalan ?></option>
+									<option value="<?= $val->id ?>"><?= $val->nama_jalan ?></option>
 								<?php endforeach; ?>
 							</select>
 						</div>
