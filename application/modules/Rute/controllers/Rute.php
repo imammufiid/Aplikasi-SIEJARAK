@@ -41,14 +41,14 @@ class Rute extends CI_Controller
 	public function delete()
 	{
 		$this->crud->set_table('graph');
-		$this->crud->where('no');
+		$this->crud->where('id');
 		echo $this->crud->crud('delete');
 	}
 
 	public function modal($view)
 	{
-		$data['rute'] = $this->db->where('no', @$_GET['id'])->get('graph')->row();
-		$data['dlt'] = $this->db->where('no', @$_GET['id'])->get('v_rute')->row();
+		$data['rute'] = $this->db->where('id', @$_GET['id'])->get('graph')->row();
+		$data['dlt'] = $this->db->where('id', @$_GET['id'])->get('v_rute')->row();
 		$data['kota'] = $this->dm->kota_get();
 		$this->sys->render_metronic_modal($view, $data);
 	}

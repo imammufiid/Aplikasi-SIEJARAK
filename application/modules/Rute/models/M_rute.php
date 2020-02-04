@@ -5,8 +5,8 @@ class M_rute extends CI_Model {
 
 	function rute_save() {
 		$this->db->set($_POST);
-		if (!empty(@$_POST['no'])) {
-			$this->db->where('no', @$_POST['no']);
+		if (!empty(@$_POST['id'])) {
+			$this->db->where('id', @$_POST['id']);
 			$this->db->update('graph');
 		} else {
 			$this->db->insert('graph');
