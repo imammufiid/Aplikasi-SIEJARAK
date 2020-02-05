@@ -1,18 +1,4 @@
-/*
- Navicat Premium Data Transfer
 
- Source Server         : localhost
- Source Server Type    : MySQL
- Source Server Version : 100408
- Source Host           : localhost:3306
- Source Schema         : uas_dijkstra
-
- Target Server Type    : MySQL
- Target Server Version : 100408
- File Encoding         : 65001
-
- Date: 05/02/2020 16:38:36
-*/
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
@@ -253,7 +239,7 @@ INSERT INTO `jalan` VALUES (36, 'TLG', 'Tulungagung', 1);
 -- View structure for v_rute
 -- ----------------------------
 DROP VIEW IF EXISTS `v_rute`;
-CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `v_rute` AS SELECT
+CREATE VIEW `v_rute` AS SELECT
 	a.id,
 	( SELECT b.nama_jalan FROM jalan b WHERE b.id = a.id_kota_asal ) AS asal,
 	( SELECT c.nama_jalan FROM jalan c WHERE c.id = a.id_kota_tujuan ) AS tujuan,
@@ -265,24 +251,24 @@ FROM
 -- View structure for _v_sys_navbar
 -- ----------------------------
 DROP VIEW IF EXISTS `_v_sys_navbar`;
-CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `_v_sys_navbar` AS select `_sys_navbar`.`navbar_id` AS `navbar_id`,`_sys_navbar`.`navbar_parent` AS `navbar_parent`,(select if((`_sys_navbar`.`navbar_parent` = 0),'Parent',(select `nvbar`.`navbar_label` from `_sys_navbar` `nvbar` where (`nvbar`.`navbar_id` = `_sys_navbar`.`navbar_parent`)))) AS `navbar_parent_label`,(select `nvbar`.`navbar_label` from `_sys_navbar` `nvbar` where (`nvbar`.`navbar_id` = `_sys_navbar`.`navbar_parent`)) AS `navbar_child_parent_label`,`_sys_navbar`.`navbar_label` AS `navbar_label`,`_sys_navbar`.`navbar_href` AS `navbar_href`,`_sys_navbar`.`navbar_icon` AS `navbar_icon`,`_sys_navbar`.`navbar_index` AS `navbar_index`,`_sys_navbar`.`navbar_status` AS `navbar_status`,`_sys_status`.`status_id` AS `status_id`,`_sys_status`.`status_label` AS `status_label` from (`_sys_navbar` join `_sys_status` on((`_sys_status`.`status_id` = `_sys_navbar`.`navbar_status`))) ; ;
+CREATE VIEW `_v_sys_navbar` AS select `_sys_navbar`.`navbar_id` AS `navbar_id`,`_sys_navbar`.`navbar_parent` AS `navbar_parent`,(select if((`_sys_navbar`.`navbar_parent` = 0),'Parent',(select `nvbar`.`navbar_label` from `_sys_navbar` `nvbar` where (`nvbar`.`navbar_id` = `_sys_navbar`.`navbar_parent`)))) AS `navbar_parent_label`,(select `nvbar`.`navbar_label` from `_sys_navbar` `nvbar` where (`nvbar`.`navbar_id` = `_sys_navbar`.`navbar_parent`)) AS `navbar_child_parent_label`,`_sys_navbar`.`navbar_label` AS `navbar_label`,`_sys_navbar`.`navbar_href` AS `navbar_href`,`_sys_navbar`.`navbar_icon` AS `navbar_icon`,`_sys_navbar`.`navbar_index` AS `navbar_index`,`_sys_navbar`.`navbar_status` AS `navbar_status`,`_sys_status`.`status_id` AS `status_id`,`_sys_status`.`status_label` AS `status_label` from (`_sys_navbar` join `_sys_status` on((`_sys_status`.`status_id` = `_sys_navbar`.`navbar_status`))) ; ;
 
 -- ----------------------------
 -- View structure for _v_sys_page_access
 -- ----------------------------
 DROP VIEW IF EXISTS `_v_sys_page_access`;
-CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `_v_sys_page_access` AS select `_sys_sidebar_access`.`sidebar_access_group_id` AS `group_id`,`_sys_sidebar`.`sidebar_label` AS `label`,`_sys_sidebar`.`sidebar_icon` AS `icon`,`_sys_sidebar`.`sidebar_href` AS `href`,`_sys_sidebar_access`.`sidebar_access_create` AS `create`,`_sys_sidebar_access`.`sidebar_access_read` AS `read`,`_sys_sidebar_access`.`sidebar_access_update` AS `update`,`_sys_sidebar_access`.`sidebar_access_delete` AS `delete` from (`_sys_sidebar_access` join `_sys_sidebar` on((`_sys_sidebar_access`.`sidebar_access_sidebar_id` = `_sys_sidebar`.`sidebar_id`))) union select `_sys_navbar_access`.`navbar_access_group_id` AS `group_id`,`_sys_navbar`.`navbar_label` AS `label`,`_sys_navbar`.`navbar_icon` AS `icon`,`_sys_navbar`.`navbar_href` AS `href`,`_sys_navbar_access`.`navbar_access_create` AS `create`,`_sys_navbar_access`.`navbar_access_read` AS `read`,`_sys_navbar_access`.`navbar_access_update` AS `update`,`_sys_navbar_access`.`navbar_access_delete` AS `delete` from (`_sys_navbar_access` join `_sys_navbar` on((`_sys_navbar_access`.`navbar_access_navbar_id` = `_sys_navbar`.`navbar_id`))) order by `group_id` ; ;
+CREATE VIEW `_v_sys_page_access` AS select `_sys_sidebar_access`.`sidebar_access_group_id` AS `group_id`,`_sys_sidebar`.`sidebar_label` AS `label`,`_sys_sidebar`.`sidebar_icon` AS `icon`,`_sys_sidebar`.`sidebar_href` AS `href`,`_sys_sidebar_access`.`sidebar_access_create` AS `create`,`_sys_sidebar_access`.`sidebar_access_read` AS `read`,`_sys_sidebar_access`.`sidebar_access_update` AS `update`,`_sys_sidebar_access`.`sidebar_access_delete` AS `delete` from (`_sys_sidebar_access` join `_sys_sidebar` on((`_sys_sidebar_access`.`sidebar_access_sidebar_id` = `_sys_sidebar`.`sidebar_id`))) union select `_sys_navbar_access`.`navbar_access_group_id` AS `group_id`,`_sys_navbar`.`navbar_label` AS `label`,`_sys_navbar`.`navbar_icon` AS `icon`,`_sys_navbar`.`navbar_href` AS `href`,`_sys_navbar_access`.`navbar_access_create` AS `create`,`_sys_navbar_access`.`navbar_access_read` AS `read`,`_sys_navbar_access`.`navbar_access_update` AS `update`,`_sys_navbar_access`.`navbar_access_delete` AS `delete` from (`_sys_navbar_access` join `_sys_navbar` on((`_sys_navbar_access`.`navbar_access_navbar_id` = `_sys_navbar`.`navbar_id`))) order by `group_id` ; ;
 
 -- ----------------------------
 -- View structure for _v_sys_sidebar
 -- ----------------------------
 DROP VIEW IF EXISTS `_v_sys_sidebar`;
-CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `_v_sys_sidebar` AS select `_sys_sidebar`.`sidebar_id` AS `sidebar_id`,`_sys_sidebar`.`sidebar_parent` AS `sidebar_parent`,(select if((`_sys_sidebar`.`sidebar_parent` = 0),'Parent',(select `sdbar`.`sidebar_label` from `_sys_sidebar` `sdbar` where (`sdbar`.`sidebar_id` = `_sys_sidebar`.`sidebar_parent`)))) AS `sidebar_parent_label`,(select `sdbar`.`sidebar_label` from `_sys_sidebar` `sdbar` where (`sdbar`.`sidebar_id` = `_sys_sidebar`.`sidebar_parent`)) AS `sidebar_child_parent_label`,`_sys_sidebar`.`sidebar_label` AS `sidebar_label`,`_sys_sidebar`.`sidebar_href` AS `sidebar_href`,`_sys_sidebar`.`sidebar_icon` AS `sidebar_icon`,`_sys_sidebar`.`sidebar_index` AS `sidebar_index`,`_sys_sidebar`.`sidebar_status` AS `sidebar_status`,`_sys_status`.`status_id` AS `status_id`,`_sys_status`.`status_label` AS `status_label` from (`_sys_sidebar` join `_sys_status` on((`_sys_status`.`status_id` = `_sys_sidebar`.`sidebar_status`))) ; ;
+CREATE VIEW `_v_sys_sidebar` AS select `_sys_sidebar`.`sidebar_id` AS `sidebar_id`,`_sys_sidebar`.`sidebar_parent` AS `sidebar_parent`,(select if((`_sys_sidebar`.`sidebar_parent` = 0),'Parent',(select `sdbar`.`sidebar_label` from `_sys_sidebar` `sdbar` where (`sdbar`.`sidebar_id` = `_sys_sidebar`.`sidebar_parent`)))) AS `sidebar_parent_label`,(select `sdbar`.`sidebar_label` from `_sys_sidebar` `sdbar` where (`sdbar`.`sidebar_id` = `_sys_sidebar`.`sidebar_parent`)) AS `sidebar_child_parent_label`,`_sys_sidebar`.`sidebar_label` AS `sidebar_label`,`_sys_sidebar`.`sidebar_href` AS `sidebar_href`,`_sys_sidebar`.`sidebar_icon` AS `sidebar_icon`,`_sys_sidebar`.`sidebar_index` AS `sidebar_index`,`_sys_sidebar`.`sidebar_status` AS `sidebar_status`,`_sys_status`.`status_id` AS `status_id`,`_sys_status`.`status_label` AS `status_label` from (`_sys_sidebar` join `_sys_status` on((`_sys_status`.`status_id` = `_sys_sidebar`.`sidebar_status`))) ; ;
 
 -- ----------------------------
 -- View structure for _v_sys_user
 -- ----------------------------
 DROP VIEW IF EXISTS `_v_sys_user`;
-CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `_v_sys_user` AS select `_sys_user`.`user_id` AS `user_id`,`_sys_user`.`user_firstname` AS `user_firstname`,`_sys_user`.`user_lastname` AS `user_lastname`,`_sys_user`.`user_birth` AS `user_birth`,`_sys_user`.`user_phone` AS `user_phone`,`_sys_user`.`user_email` AS `user_email`,`_sys_user`.`user_address` AS `user_address`,`_sys_user`.`user_username` AS `user_username`,`_sys_user`.`user_password` AS `user_password`,`_sys_user`.`user_group_id` AS `user_group_id`,`_sys_user`.`user_status_id` AS `user_status_id`,`_sys_group`.`group_id` AS `group_id`,`_sys_group`.`group_label` AS `group_label`,`_sys_status`.`status_id` AS `status_id`,`_sys_status`.`status_label` AS `status_label` from ((`_sys_user` join `_sys_group` on((`_sys_group`.`group_id` = `_sys_user`.`user_group_id`))) join `_sys_status` on((`_sys_status`.`status_id` = `_sys_user`.`user_status_id`))) ; ;
+CREATE VIEW `_v_sys_user` AS select `_sys_user`.`user_id` AS `user_id`,`_sys_user`.`user_firstname` AS `user_firstname`,`_sys_user`.`user_lastname` AS `user_lastname`,`_sys_user`.`user_birth` AS `user_birth`,`_sys_user`.`user_phone` AS `user_phone`,`_sys_user`.`user_email` AS `user_email`,`_sys_user`.`user_address` AS `user_address`,`_sys_user`.`user_username` AS `user_username`,`_sys_user`.`user_password` AS `user_password`,`_sys_user`.`user_group_id` AS `user_group_id`,`_sys_user`.`user_status_id` AS `user_status_id`,`_sys_group`.`group_id` AS `group_id`,`_sys_group`.`group_label` AS `group_label`,`_sys_status`.`status_id` AS `status_id`,`_sys_status`.`status_label` AS `status_label` from ((`_sys_user` join `_sys_group` on((`_sys_group`.`group_id` = `_sys_user`.`user_group_id`))) join `_sys_status` on((`_sys_status`.`status_id` = `_sys_user`.`user_status_id`))) ; ;
 
 SET FOREIGN_KEY_CHECKS = 1;
