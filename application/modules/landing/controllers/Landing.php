@@ -21,17 +21,28 @@ class Landing extends CI_Controller
 	{
 		$asal = $this->input->post('asal');
 		$tujuan = $this->input->post('tujuan');
+		$qry_inp =  'SELECT id_kota_asal AS "0", id_kota_tujuan AS "1", jarak AS "2" FROM graph';
+		$query = $this->db->query($qry_inp)->result_array();
 
-		$this->db->select('id_kota_asal, id_kota_tujuan, jarak');
-		$this->db->from('graph');
-		$graph = $this->db->get()->result_array();
+		$path = $this->_dijkstra($query, $asal, $tujuan);
+		$hasil = "";
+		$i = 1;
+		foreach ($path as $key => $val) {
+			$qry_jln =  'SELECT id_jalan, nama_jalan FROM jalan where id=' . $val;
+			$jalan = $this->db->query($qry_jln)->result_array();;
+			$hasil .= '
+				<tr>
+					<td>' . $i . '</td>
+					<td>' . $jalan[0]['nama_jalan'] . '</td>
+				</tr>
 
-		// $path = $this->_dijkstra($graph, $asal, $tujuan);
-		var_dump($graph);
-
+		';
+			$i++;
+		}
+		return $hasil;
 	}
 
-	private function _dijkstra($graph_array, $source, $target)
+	function _dijkstra($graph_array, $source, $target)
 	{
 		$vertices = array();
 		$neighbours = array();
