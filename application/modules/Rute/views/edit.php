@@ -1,12 +1,12 @@
 <div class="row">
-    <input type="hidden" name="no" value="<?= $rute->no ?>">
+    <input type="hidden" name="id" value="<?= $rute->id ?>">
     <div class="col-md-12">
         <div class="form-group">
             <label for="nama">Kota Asal</label>
-            <select name="asal" id="asal" class="form-control" style="width: 100%">
+            <select name="id_kota_asal" id="asal" class="form-control" style="width: 100%">
                 <option value selected disabled>-- Pilih --</option>
                 <?php foreach ($kota as $key => $val) : ?>
-                    <option value="<?= $val->id_jalan ?>" <?php if($rute->asal == $val->id_jalan) echo "selected" ?>><?= $val->nama_jalan ?></option>
+                    <option value="<?= $val->id ?>" <?php if($rute->id_kota_asal == $val->id) echo "selected" ?>><?= $val->nama_jalan ?></option>
                 <?php endforeach; ?>
             </select>
         </div>
@@ -14,10 +14,10 @@
     <div class="col-md-12">
         <div class="form-group">
             <label>Kota Tujuan</label>
-            <select name="tujuan" id="tujuan" class="form-control" style="width: 100%">
+            <select name="id_kota_tujuan" id="tujuan" class="form-control" style="width: 100%">
                 <option value selected disabled>-- Pilih --</option>
                 <?php foreach ($kota as $key => $val) : ?>
-                    <option value="<?= $val->id_jalan ?>" <?php if($rute->tujuan == $val->id_jalan) echo "selected" ?>><?= $val->nama_jalan ?></option>
+                    <option value="<?= $val->id ?>" <?php if($rute->id_kota_tujuan == $val->id) echo "selected" ?>><?= $val->nama_jalan ?></option>
                 <?php endforeach; ?>
             </select>
         </div>

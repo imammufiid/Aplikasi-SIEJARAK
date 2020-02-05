@@ -50,6 +50,7 @@ class Rute extends CI_Controller
 		$data['rute'] = $this->db->where('id', @$_GET['id'])->get('graph')->row();
 		$data['dlt'] = $this->db->where('id', @$_GET['id'])->get('v_rute')->row();
 		$data['kota'] = $this->dm->kota_get();
+		// var_dump($data);
 		$this->sys->render_metronic_modal($view, $data);
 	}
 

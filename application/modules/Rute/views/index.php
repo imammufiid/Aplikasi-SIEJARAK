@@ -122,11 +122,11 @@
 					render: function(data, row, columns, meta) {
 						var dt_btn_utils = $('#dt_btn_utils').clone();
 						dt_btn_utils.find('.dt-edit').attr({
-							'target-id': data.no,
+							'target-id': data.id,
 							'onclick': 'dt_edit(this)'
 						});
 						dt_btn_utils.find('.dt-delete').attr({
-							'target-id': data.no,
+							'target-id': data.id,
 							'onclick': 'dt_delete(this)'
 						});
 						return dt_btn_utils.html();
