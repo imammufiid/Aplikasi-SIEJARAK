@@ -101,14 +101,14 @@ License: You must have a valid license purchased only from themeforest(the above
 							<!-- end:: Brand -->
 
 							<!-- begin:: Header Topbar -->
-							<!-- <div class="kt-header__topbar">
+							<div class="kt-header__topbar">
 								<div class="kt-header__brand">
 									<h3 class="kt-header__title kt-grid__item text-white">
-										<?php echo $_settings->setting_web_name ?>
+										<a href="<?= base_url('auth/login') ?>"><h4 style="color: #fff"><i class="fa fa-sign-in-alt"></i> &nbsp; Login</h4></a>
 									</h3>
 								</div>
 								<?php //echo $_navbar_right ?>
-							</div> -->
+							</div>
 
 							<!-- end:: Header Topbar -->
 						</div>
